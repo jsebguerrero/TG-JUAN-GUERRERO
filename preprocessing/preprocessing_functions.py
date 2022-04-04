@@ -2,6 +2,8 @@ from scipy import interpolate
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import skimage
+from sklearn.preprocessing import MinMaxScaler
 
 
 def find_vel_and_pos(df):
@@ -58,3 +60,12 @@ def resample(data_frame, fs, columns):
 
 def filter_gravity(data_frame):
     return (data_frame - data_frame.mean(axis=0)) / data_frame.max(axis=0)
+
+
+def segmentate(data_frame, overlap, window):
+    segments = [[],[],[]]
+    for i, column in enumerate(data_frame.columns):
+        result = skimage.util.view_as_windows(data_frame[column].values, window, step=overlap)
+        for r in result:
+            segments[i].append(r)
+    return segments
