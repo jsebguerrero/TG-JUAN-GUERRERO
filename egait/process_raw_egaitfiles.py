@@ -4,19 +4,19 @@ import os
 
 def parse_df(directory, file):
     """
-    Opens a DataFrame for a csv file in directory, then maps the three first rows into df
-    where they will be columns
+    Opens a DataFrame for a csv file in directory, then maps the three columns into another DataFrame
+    where they are preceeded with column names for the axis
     :param file: str
     :param directory: str
     :return: DataFrame
     """
     # Empty DF
-    df = pd.DataFrame(columns=["1", "2", "3"])
+    df = pd.DataFrame()
     temp = pd.read_csv(os.path.join(directory, file))
-    df["1"] = temp.columns
-    df["2"] = temp.iloc[0].values
-    df["2"] = temp.iloc[1].values
-    df.to_csv(os.path.join(left_foot_dir, file))
+    df["aX [m/s^2]"] = temp.iloc[:, 0].values
+    df["aY [m/s^2]"] = temp.iloc[:, 1].values
+    df["aZ [m/s^2]"] = temp.iloc[:, 2].values
+    df.to_csv(os.path.join(directory, file))
 
 
 if __name__ == "__main__":

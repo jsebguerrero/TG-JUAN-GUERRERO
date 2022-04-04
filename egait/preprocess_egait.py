@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # right foot dir
     egait_dir_r = os.path.join(os.getcwd(), 'r')
     processed_dir_r = os.path.join(os.getcwd(), processed_dir, 'r')
-    columns = [1, 2]
+    columns = ['aY [m/s^2]', 'aX [m/s^2]', 'aZ [m/s^2]']
     # Send directories through pipeline
-    preprocessing_pipeline.pipeline_csv(egait_dir_l, processed_dir_l, columns, skiprows=5, sep=',', fs=50)
-    preprocessing_pipeline.pipeline_csv(egait_dir_r, processed_dir_r, columns, skiprows=5, sep=',', fs=50)
+    preprocessing_pipeline.pipeline_csv(egait_dir_l, processed_dir_l, columns, skiprows=0, sep=',', fs=50)
+    preprocessing_pipeline.pipeline_csv(egait_dir_r, processed_dir_r, columns, skiprows=0, sep=',', fs=50)
